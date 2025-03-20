@@ -23,7 +23,7 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
 
-  order service:
+  order:
     depends_on: 
       - kafka
     image: adoptopenjdk/maven-openjdk11:latest
@@ -37,7 +37,7 @@ services:
       - ./order service:/usr/src
       - ./maven-repo:/root/.m2
       
-  support service:
+  support:
     depends_on: 
       - kafka
     image: adoptopenjdk/maven-openjdk11:latest
@@ -51,7 +51,7 @@ services:
       - ./support service:/usr/src
       - ./maven-repo:/root/.m2
       
-  dashboard service:
+  dashboard:
     depends_on: 
       - kafka
     image: adoptopenjdk/maven-openjdk11:latest

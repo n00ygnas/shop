@@ -21,6 +21,8 @@ public class Inventory {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    private String productId;
+
     private String name;
 
     private String price;
@@ -36,30 +38,13 @@ public class Inventory {
 
     //<<< Clean Arch / Port Method
     public static void decreaseInventory(DeliveryStarted deliveryStarted) {
-        //implement business logic here:
-
-        /** Example 1:  new item 
-        Inventory inventory = new Inventory();
-        repository().save(inventory);
-
-        InventoryDecreased inventoryDecreased = new InventoryDecreased(inventory);
-        inventoryDecreased.publishAfterCommit();
-        */
-
-        /** Example 2:  finding and process
-        
-
-        repository().findById(deliveryStarted.get???()).ifPresent(inventory->{
-            
-            inventory // do something
+        repository().findByProductId(deliveryStarted.getProductId()).ifPresent(inventory -> {
+            inventory.setQty(inventory.getQty() - deliveryStarted.getQty());
             repository().save(inventory);
 
             InventoryDecreased inventoryDecreased = new InventoryDecreased(inventory);
             inventoryDecreased.publishAfterCommit();
-
-         });
-        */
-
+        });
     }
 
     //>>> Clean Arch / Port Method

@@ -2,7 +2,7 @@ package shop.domain;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
-import shop.domain.*;
+import java.util.Optional;
 
 //<<< PoEAA / Repository
 @RepositoryRestResource(
@@ -10,4 +10,6 @@ import shop.domain.*;
     path = "inventories"
 )
 public interface InventoryRepository
-    extends PagingAndSortingRepository<Inventory, Long> {}
+    extends PagingAndSortingRepository<Inventory, Long> {
+        Optional<Inventory> findByProductId(String productId);
+}
